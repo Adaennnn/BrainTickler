@@ -1,0 +1,148 @@
+/* ----------------------
+  General Styles
+------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+
+body, h1, h2, h3, h4, h5, h6, ul, ol, li, figure, p, pre, blockquote, img, input, button {
+  padding: 0;
+  margin: 0;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+}
+
+input[type='radio'] {
+  appearance: none;
+  display: none;
+}
+
+/* ----------------------
+  Button Styles
+------------------------ */
+
+label,
+.check-answers-btn,
+.play-again-btn,
+.start-btn {
+  padding: 1em 2.5em;
+  border-radius: 10px;
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  cursor: pointer;
+  border: none;
+  font: inherit;
+}
+
+label {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #4D5B9E;
+  color: #293264;
+  background-color: #fff;
+  margin-right: 15px;
+  border-radius: 8px;
+}
+
+.check-answers-btn,
+.play-again-btn {
+  align-self: center;
+}
+
+.start-btn {
+  padding: 1.2em 4em;
+  border-radius: 15px;
+}
+
+/* ----------------------
+  Container Styles
+------------------------ */
+
+.start-container,
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.start-container {
+  align-items: center;
+}
+
+.quiz-container {
+  max-height: 975px;
+  width: 700px;
+  margin: 0 auto;
+}
+
+.quiz-item-container {
+  padding: 1em;
+  border-bottom: 1px solid #DBDEF0;
+  margin-bottom: 20px;
+}
+
+.end-game-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
+
+/* ----------------------
+  Text Styles
+------------------------ */
+
+.start-title,
+.question,
+.user-score-description {
+  color: #293264;
+  font-weight: 700;
+}
+
+.start-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.25em;
+}
+
+.start-description {
+  font-size: 1.5rem;
+  margin-bottom: 1.5em;
+}
+
+.user-score-description {
+  font-size: 1.2rem;
+}
+
+.question {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* ----------------------
+  Answer Styles
+------------------------ */
+
+.user-answer {
+  background-color: #D6DBF5;
+}
+
+.correct-answer {
+  background-color: #94D7A2;
+}
+
+.incorrect-answer {
+  background-color: rgba(248, 188, 188, 0.5);
+  color: rgba(41, 50, 100, 0.3);
+}
