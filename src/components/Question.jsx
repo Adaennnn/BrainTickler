@@ -2,16 +2,23 @@ import React from "react";
 
 function Question({quizQuestions, quizCorrectAnswers, quizUserAnswers, userAnswerKeyBase, answersSubmited, handleChange}) {
 
+    // Map over the quiz questions and generate the quiz UI
     const quizElements = quizQuestions.map((quizItem, index) => {
         const currentQuestionAnswerKey = `${userAnswerKeyBase}${index + 1}`
         const {answers, question} = quizItem
+
+        // Generate fieldsets for each quiz question
         return (
             <fieldset key={index} className="quiz-item-container">
                 <legend className="question" dangerouslySetInnerHTML={{__html: question}}></legend>
+
+                {/* Map over possible answers for each question */}
                 {answers.map((answer, i) => {
                     let answerClass
                     const userInput = quizUserAnswers[currentQuestionAnswerKey] === answer
                     const correctInput = answer === quizCorrectAnswers[index]
+
+                    // Determine the answer's class based on user input and whether answers have been submitted
                     if (!answersSubmited && userInput) {
                         answerClass = "user-answer"
                     } else if (answersSubmited && userInput) {
@@ -25,6 +32,8 @@ function Question({quizQuestions, quizCorrectAnswers, quizUserAnswers, userAnswe
                     } else {
                         answerClass = "None"
                     }
+
+                    // Render each radio input and its label
                     return (
                         <div key={i} className="answer-container">
                         <input 
@@ -45,9 +54,8 @@ function Question({quizQuestions, quizCorrectAnswers, quizUserAnswers, userAnswe
         )
     })
 
-    return (
-        quizElements
-    )
+    // Return the complete set of quiz questions
+    return quizElements
 }
 
 export default Question
