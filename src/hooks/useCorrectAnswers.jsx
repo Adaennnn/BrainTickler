@@ -1,6 +1,6 @@
 import React from "react";
 
-function useCorrectAnswers(quizUserAnswers, quizCorrectAnswers) {
+export const useCorrectAnswers = (quizUserAnswers, quizCorrectAnswers) => {
     // State to hold correct answers that the user provided
     const [correctUserAnswers, setCorrectUserAnswers] = React.useState([])
 
@@ -21,12 +21,10 @@ function useCorrectAnswers(quizUserAnswers, quizCorrectAnswers) {
             correctUserAnswer && tempCorrectUserAnswers.push(correctUserAnswer)
         }
 
-    // Update the state with the correct answers
-    setCorrectUserAnswers(tempCorrectUserAnswers);
+        // Update the state with the correct answers
+        setCorrectUserAnswers(tempCorrectUserAnswers);
     }, [quizUserAnswers, quizCorrectAnswers])
 
     // Return the array of correct answers
     return correctUserAnswers
 }
-
-export default useCorrectAnswers

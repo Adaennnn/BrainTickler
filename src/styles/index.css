@@ -59,6 +59,42 @@ label {
   align-self: center;
 }
 
+.check-answers-btn {
+  position: relative;
+}
+
+.check-answers-btn[disabled] {
+  background-color: #333;
+  cursor: not-allowed;
+}
+
+.check-answers-btn[disabled]:hover::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: #333;
+  color: #F5F7FB;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.check-answers-btn[disabled]:hover::after {
+  content: '';
+  position: absolute;
+  bottom: 90%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+
 .start-btn {
   padding: 1.2em 4em;
   border-radius: 15px;
