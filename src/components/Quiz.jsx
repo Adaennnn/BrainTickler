@@ -1,6 +1,7 @@
 import React from "react"
 import Question from "./Question";
 import { useCorrectAnswers } from "../hooks/useCorrectAnswers";
+import { useFetchQuiz } from "../hooks/useFetchQuiz";
 import { buildUndefinedKeysObject } from "../utilities/utility"
 
 //TODO Refactor this component so that it handles less logic and more rendering, the rest of the logic should be handled in Question component
@@ -41,7 +42,7 @@ function Quiz({quizQuestions, quizCorrectAnswers, quizConfig}) {
             setAnswersSubmited(true) // If all answers given, set flag to true
         }
     }
- 
+
     return (
         <form onSubmit={handleSubmit} className="quiz-container">
             <Question 
@@ -56,16 +57,12 @@ function Quiz({quizQuestions, quizCorrectAnswers, quizConfig}) {
             {/* Conditional rendering based on whether answers have been submitted */}
             {
                 answersSubmited
-
                 ?
-
                 <div className="end-game-container">
                     <p className="user-score-description">You scored {correctUserAnswers.length}/5 correct answers</p>
                     <button className="play-again-btn">Play again</button>
                 </div>
-
                 :
-                
                 <button 
                     className="check-answers-btn"
                     disabled={!allAnswersGiven}
