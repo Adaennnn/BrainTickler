@@ -1,4 +1,5 @@
 # BrainTickler
+
 ## A Quiz React App
 
 Welcome to BrainTickler! Built with passion and fueled by the powers of React, this quiz app isn't just a brain teaser—it's an interactive journey through the land of knowledge.
@@ -14,6 +15,8 @@ So what are you waiting for? Let's tickle those neurons! 🚀
 - 👨‍💻 **Event Handling & Forms**: Mastered the nuances of React event handling and form submissions.
 - ⚡ **Performance Optimizations**: Dived deep into React's optimization techniques, employing `useMemo` and `useEffect` to ensure the app runs smoothly.
 - 🔀 **Conditional Rendering**: Got hands-on experience with conditional rendering in React.
+  🔒 **Data Sanitization**: Learned the importance of sanitizing user-facing data to protect against XSS attacks, using the DOMPurify library for this specific implementation.
+  🎲 **Array Shuffling**: Gained experience in implementing the Fisher-Yates shuffle algorithm to randomize the answer choices, enhancing the user experience by providing a unique quiz every time.
 
 ## Features
 

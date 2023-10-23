@@ -1,19 +1,19 @@
 import React from "react";
 import { sanitize, shuffle } from "../utilities/utility";
 
-export const useFetchQuiz = (quizConfig) => {
+function useFetchQuiz(quizConfig) {
     // State Variables
     const [quizQuestions, setQuizQuestions] = React.useState([]);
     const [quizCorrectAnswers, setQuizCorrectAnswers] = React.useState([]);
 
     // Generate API URL based on quizConfig
-    const generateApiUrl = (config) => {
+    function generateApiUrl(config) {
         const { numOfQuestions, category, difficulty, type } = config;
         return `https://opentdb.com/api.php?amount=${numOfQuestions}&category=${category}&difficulty=${difficulty}&type=${type}`;
     };
 
     // Process and Store Fetched Quiz Data
-    const processQuizData = (data) => {
+    function processQuizData(data) {
         const sanitizedQuizQuestions = sanitize(data);
         const correctAnswers = sanitizedQuizQuestions.map(quiz => quiz.correct_answer);
 
@@ -40,3 +40,5 @@ export const useFetchQuiz = (quizConfig) => {
 
     return [quizQuestions, quizCorrectAnswers];
 };
+
+export default useFetchQuiz;
