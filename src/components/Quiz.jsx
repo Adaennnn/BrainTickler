@@ -2,7 +2,7 @@ import React from "react";
 import Question from "./Question";
 import { useCorrectAnswers } from "../hooks/useCorrectAnswers";
 import { buildUndefinedKeysObject } from "../utilities/utility";
-
+// TODO Fix the issue where the submit answer button is still disabled after all answers have been provided (when there are 10 qquestions)
 function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig }) {
 
   // Initialize state variables and other base variables
@@ -56,7 +56,7 @@ function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig }) {
       {answersSubmited ? (
         <div className="end-game-container">
           <p className="user-score-description">
-            You scored {correctUserAnswers.length}/5 correct answers
+            You scored {correctUserAnswers.length}/{numOfQuestions} correct answers
           </p>
           <button className="play-again-btn">Play again</button>
         </div>
