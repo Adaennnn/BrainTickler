@@ -1,61 +1,70 @@
 import React from "react";
 
-function Question({quizQuestions, quizCorrectAnswers, quizUserAnswers, userAnswerKeyBase, answersSubmited, handleChange}) {
+function Question({
+  quizQuestions,
+  quizCorrectAnswers,
+  quizUserAnswers,
+  userAnswerKeyBase,
+  answersSubmited,
+  handleChange,
+}) {
+  // Generate quiz UI by mapping over the list of quiz questions.
+  const quizElements = quizQuestions.map((quizItem, index) => {
+    // Construct the unique key for user's answer to each question.
+    const currentQuestionAnswerKey = `${userAnswerKeyBase}${index + 1}`;
+    const { answers, question } = quizItem;
 
-    // Map over the quiz questions and generate the quiz UI
-    const quizElements = quizQuestions.map((quizItem, index) => {
-        const currentQuestionAnswerKey = `${userAnswerKeyBase}${index + 1}`
-        const {answers, question} = quizItem
+    // Return a fieldset for each question.
+    return (
+      <fieldset key={index} className="quiz-item-container">
+        {/* Safely inject HTML for the question */}
+        <legend className="question" dangerouslySetInnerHTML={{ __html: question }}></legend>
+        
+        {/* Iterate through each answer to generate the options */}
+        {answers.map((answer, i) => {
+          // Initialize default answerClass
+          let answerClass = "None";
 
-        // Generate fieldsets for each quiz question
-        return (
-            <fieldset key={index} className="quiz-item-container">
-                <legend className="question" dangerouslySetInnerHTML={{__html: question}}></legend>
+          // Check if the user's answer matches this answer option
+          const userInput = quizUserAnswers[currentQuestionAnswerKey] === answer;
+          // Check if this answer option is the correct one
+          const correctInput = answer === quizCorrectAnswers[index];
 
-                {/* Map over possible answers for each question */}
-                {answers.map((answer, i) => {
-                    let answerClass
-                    const userInput = quizUserAnswers[currentQuestionAnswerKey] === answer
-                    const correctInput = answer === quizCorrectAnswers[index]
+          // Determine the appropriate class for the answer
+          if (answersSubmited) {
+            if (userInput && correctInput) answerClass = "correct-answer";
+            else if (userInput) answerClass = "incorrect-answer";
+            else if (correctInput) answerClass = "correct-answer";
+          } else if (userInput) {
+            answerClass = "user-answer";
+          }
 
-                    // Determine the answer's class based on user input and whether answers have been submitted
-                    if (!answersSubmited && userInput) {
-                        answerClass = "user-answer"
-                    } else if (answersSubmited && userInput) {
-                        if (correctInput) {
-                            answerClass = "correct-answer"
-                        } else {
-                            answerClass = "incorrect-answer"
-                        }
-                    } else if (answersSubmited && !userInput && correctInput) {
-                        answerClass = "correct-answer"
-                    } else {
-                        answerClass = "None"
-                    }
+          // Generate the input and label elements for this answer
+          return (
+            <div key={i} className="answer-container">
+              <input
+                className="answer-input"
+                type="radio"
+                id={`question${index + 1}-answer${i + 1}`}
+                name={currentQuestionAnswerKey}
+                value={answer}
+                checked={quizUserAnswers[currentQuestionAnswerKey] === answer}
+                onChange={handleChange}
+              />
+              {/* Label is styled based on answerClass */}
+              <label
+                htmlFor={`question${index + 1}-answer${i + 1}`}
+                className={answerClass}
+                dangerouslySetInnerHTML={{ __html: answer }}
+              ></label>
+            </div>
+          );
+        })}
+      </fieldset>
+    );
+  });
 
-                    // Render each radio input and its label
-                    return (
-                        <div key={i} className="answer-container">
-                        <input 
-                            className="answer-input"
-                            type="radio"
-                            id={`question${index + 1}-answer${i + 1}`}
-                            name={currentQuestionAnswerKey}
-                            value={answer}
-                            checked={quizUserAnswers[currentQuestionAnswerKey] === answer}
-                            onChange={(event) => handleChange(event)}
-                        />    
-                        <label htmlFor={`question${index + 1}-answer${i + 1}`} className={answerClass} dangerouslySetInnerHTML={{__html: answer}} ></label> 
-                    </div>
-                    )
-                    }
-                )}
-            </fieldset>
-        )
-    })
-
-    // Return the complete set of quiz questions
-    return quizElements
+  return quizElements;
 }
 
-export default Question
+export default Question;
