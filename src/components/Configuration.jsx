@@ -4,7 +4,10 @@ function Configuration({
   quizConfig, 
   setQuizConfig, 
   setQuizStarted, 
-  setConfiguringQuiz
+  setConfiguringQuiz,
+  setShouldFetch,
+  error,
+  setHasInsufficientQuestions
 }) {
   
   // Local state for form data
@@ -23,13 +26,17 @@ function Configuration({
   function handleSubmit(event) {
     event.preventDefault();
     setQuizConfig(localQuizConfig);
+    setShouldFetch(true);
+    setHasInsufficientQuestions(false); // Reset the insufficient questions flag
     setConfiguringQuiz(false);
     setQuizStarted(true);
   }
+  
 
   return (
     <div className="configuration-container">
       <h1>Configuration</h1>
+      {error && <p className="error-text">{error}</p>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="category">Category:</label>
         <select 

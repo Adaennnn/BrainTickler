@@ -13,8 +13,9 @@ body, h1, h2, h3, h4, h5, h6, ul, ol, li, figure, p, pre, blockquote, img, input
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
+  background: #F2F3F7;
 }
 
 fieldset {
@@ -25,6 +26,23 @@ fieldset {
 input[type='radio'] {
   appearance: none;
   display: none;
+}
+
+label,
+.check-answers-btn,
+.play-again-btn,
+.start-btn {
+  background-color: #4D5B9E; 
+  color: #F5F7FB;
+  border: none;
+  transition: transform 0.2s; /* Added transition for a smooth hover effect */
+}
+
+label:hover, 
+.check-answers-btn:hover,
+.play-again-btn:hover,
+.start-btn:hover {
+  transform: scale(1.05); /* Scale effect on hover */
 }
 
 /* ----------------------
@@ -63,7 +81,6 @@ label {
 }
 
 .check-answers-btn[disabled] {
-  background-color: #333;
   cursor: not-allowed;
 }
 
@@ -92,7 +109,8 @@ label {
    Container Styles
 ------------------------ */
 .start-container,
-.quiz-container {
+.quiz-container,
+.placeholder-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -138,9 +156,14 @@ label {
   text-align: center;
 }
 
-.start-description {
+.start-description,
+.placeholder-description {
   font-size: 1.5rem;
   margin-bottom: 1.5em;
+}
+
+.placeholder-description {
+  text-align: center;
 }
 
 .user-score-description,
@@ -150,6 +173,20 @@ label {
 
 .question {
   margin-bottom: 10px;
+}
+
+.error-text {
+  background-color: #ff6b6b; /* muted red */
+  border: 1px solid #e63939; /* slightly darker red for the border */
+  border-radius: 5px; /* match other UI elements */
+  color: #fff; /* white text for contrast */
+  padding: 10px 15px;
+  font-family: 'Poppins', sans-serif; 
+  font-weight: 600; 
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 2rem;
 }
 
 /* ----------------------
@@ -173,7 +210,6 @@ label {
 ------------------------ */
 .configuration-container {
   align-items: center;
-  background-color: #f6f8fb;
   display: flex;
   flex-direction: column;
   height: 100vh;

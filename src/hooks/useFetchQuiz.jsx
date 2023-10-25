@@ -1,10 +1,12 @@
 import React from "react";
 import { sanitize, shuffle } from "../utilities/utility";
 
-function useFetchQuiz(quizConfig) {
+function useFetchQuiz(quizConfig, shouldFetch, setHasInsufficientQuestions, setConfiguringQuiz, setQuizStarted) {
     // State Variables
     const [quizQuestions, setQuizQuestions] = React.useState([]);
     const [quizCorrectAnswers, setQuizCorrectAnswers] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [error, setError] = React.useState(null);
 
     // Generate API URL based on quizConfig
     function generateApiUrl(config) {
@@ -32,13 +34,37 @@ function useFetchQuiz(quizConfig) {
 
     // Fetch and Process Data on quizConfig change
     React.useEffect(() => {
+        if (!shouldFetch) return;
+        setIsLoading(true);
         const apiUrl = generateApiUrl(quizConfig);
+        
         fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => processQuizData(data.results));
-    }, [quizConfig]);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.response_code === 1) {
+                    setQuizStarted(false);
+                    setHasInsufficientQuestions(true);
+                    setIsLoading(false);
+                    setConfiguringQuiz(true);
+                    throw new Error("Oops! We couldn't find enough questions for your selected Configuration.");
+                }
+                setHasInsufficientQuestions(false);
+                processQuizData(data.results);
+                setIsLoading(false);
+                setError(null);  // Reset any existing errors
+            })
+            .catch(error => {
+                setError(error.message);  // Set error message
+                setIsLoading(false);
+            });
+    }, [quizConfig, shouldFetch, setHasInsufficientQuestions, setConfiguringQuiz, setQuizStarted]);
 
-    return [quizQuestions, quizCorrectAnswers];
+    return [quizQuestions, quizCorrectAnswers, isLoading, error];
 };
 
 export default useFetchQuiz;
