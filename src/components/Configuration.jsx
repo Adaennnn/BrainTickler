@@ -97,7 +97,7 @@ function Configuration({
           <option value="boolean">True / False</option>
         </select>
         
-        <button>Start Quiz</button>
+        <button className="start-quiz-btn">Start Quiz</button>
       </form>
     </div>
   );
