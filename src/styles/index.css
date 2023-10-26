@@ -18,6 +18,8 @@ body {
 
 fieldset {
   border: none;
+  margin-bottom: 20px;
+  width: 100%; 
   display: flex;
 }
 
@@ -51,6 +53,7 @@ input[type='radio'] {
 
 .question {
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .error-text {
@@ -135,7 +138,7 @@ label:hover, .check-answers-btn:hover, .play-again-btn:hover, .start-btn:hover, 
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   justify-content: center;
 }
 
@@ -156,6 +159,16 @@ label:hover, .check-answers-btn:hover, .play-again-btn:hover, .start-btn:hover, 
   display: flex;
   justify-content: space-around;
   width: 100%;
+}
+
+.answer-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.answer-container label {
+  flex-grow: 0; /* This ensures labels don't stretch beyond their content */
+  margin: 0 5px; /* This gives a little spacing between each option */
 }
 
 /* ========================================
@@ -233,5 +246,35 @@ label:hover, .check-answers-btn:hover, .play-again-btn:hover, .start-btn:hover, 
 
   .configuration-container button {
     grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .quiz-container {
+    width: 90%;  /* Adjust width */
+  }
+  
+  .start-title {
+    font-size: 2rem;  /* Smaller title */
+  }
+
+  .start-description, .placeholder-description {
+    font-size: 1.2rem;  /* Smaller description */
+  }
+
+  .user-score-description, .question {
+    font-size: 1rem;  /* Smaller question and score description */
+  }
+
+  .answer-container {
+    flex-direction: column;  /* Stack answers vertically */
+  }
+
+  label, .check-answers-btn, .play-again-btn, .start-btn, .start-quiz-btn {
+    padding: 0.8em 2em;  /* Smaller padding */
+  }
+
+  .quiz-item-container {
+    padding: 0.8em;  /* Smaller padding */
   }
 }
