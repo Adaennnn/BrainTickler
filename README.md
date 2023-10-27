@@ -20,7 +20,7 @@ Originated from Scrimba's Front-end career path.
 - 🎲 Dynamic questions via Open Trivia DB.
 - ✅ Interactive multiple-choice format.
 - 🎉 Instant feedback. Celebrate or sulk!
-- 📱 Partially mobile-responsive.
+- 📱 Fully mobile-responsive.
 
 ## Tech Stack
 
