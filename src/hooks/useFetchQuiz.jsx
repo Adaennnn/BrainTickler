@@ -7,6 +7,7 @@ function useFetchQuiz(quizConfig, shouldFetch, setHasInsufficientQuestions, setC
     const [quizCorrectAnswers, setQuizCorrectAnswers] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
+    const [typeOfQuiz, setTypeOfQuiz] = React.useState("")
 
     // Generate API URL based on quizConfig
     function generateApiUrl(config) {
@@ -18,7 +19,7 @@ function useFetchQuiz(quizConfig, shouldFetch, setHasInsufficientQuestions, setC
     function processQuizData(data) {
         const sanitizedQuizQuestions = sanitize(data);
         const correctAnswers = sanitizedQuizQuestions.map(quiz => quiz.correct_answer);
-
+        setTypeOfQuiz(data[0].type)
         // Shuffle and prepare quiz questions
         const processedQuizQuestions = sanitizedQuizQuestions.map(quiz => {
             const { correct_answer, incorrect_answers } = quiz;
@@ -64,7 +65,7 @@ function useFetchQuiz(quizConfig, shouldFetch, setHasInsufficientQuestions, setC
             });
     }, [quizConfig, shouldFetch, setHasInsufficientQuestions, setConfiguringQuiz, setQuizStarted]);
 
-    return [quizQuestions, quizCorrectAnswers, isLoading, error];
+    return [quizQuestions, quizCorrectAnswers, isLoading, error, typeOfQuiz];
 };
 
 export default useFetchQuiz;
