@@ -1,5 +1,7 @@
 # BrainTickler 🚀
 
+![BrainTickler Logo](./assets/brainTicklerLogo.png)
+
 ## React-Powered Quiz App
 
 Jump into BrainTickler, your go-to quiz app built with React. Get those neurons buzzing!

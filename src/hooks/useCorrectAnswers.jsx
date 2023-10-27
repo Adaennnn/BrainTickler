@@ -14,7 +14,8 @@ export const useCorrectAnswers = (quizUserAnswers, quizCorrectAnswers) => {
 
             // Find matching correct answer
             const correctUserAnswer = quizCorrectAnswers.find(answer => answer === currentAnswer);
-
+            console.log(quizCorrectAnswers)
+            console.log(correctUserAnswer)
             // If found, add to temporary array
             if (correctUserAnswer) {
                 tempCorrectUserAnswers.push(correctUserAnswer);

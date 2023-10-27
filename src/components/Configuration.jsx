@@ -27,7 +27,7 @@ function Configuration({
     event.preventDefault();
     setQuizConfig(localQuizConfig);
     setShouldFetch(true);
-    setHasInsufficientQuestions(false); // Reset the insufficient questions flag
+    setHasInsufficientQuestions(false);
     setConfiguringQuiz(false);
     setQuizStarted(true);
   }
@@ -45,7 +45,6 @@ function Configuration({
           value={localQuizConfig.category}
           onChange={handleChange}
         >
-          <option value="any">Any Category</option>
           <option value="9">General Knowledge</option>
           <option value="10">Entertainment: Books</option>
           <option value="11">Entertainment: Film</option>
@@ -79,7 +78,6 @@ function Configuration({
           value={localQuizConfig.difficulty}
           onChange={handleChange}
         >
-          <option value="any">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
@@ -92,7 +90,6 @@ function Configuration({
           value={localQuizConfig.type}
           onChange={handleChange}
         >
-          <option value="any">Any Type</option>
           <option value="multiple">Multiple Choice</option>
           <option value="boolean">True / False</option>
         </select>

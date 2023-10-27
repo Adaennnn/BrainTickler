@@ -13,7 +13,6 @@ function Question({
     // Construct the unique key for user's answer to each question.
     const currentQuestionAnswerKey = `${userAnswerKeyBase}${index + 1}`;
     const { answers, question } = quizItem;
-
     // Return a fieldset for each question.
     return (
       <fieldset key={index} className="quiz-item-container">

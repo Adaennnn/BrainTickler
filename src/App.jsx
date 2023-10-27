@@ -22,8 +22,6 @@ function App() {
   // Custom hook to fetch quiz questions based on quiz configuration
   const [quizQuestions, quizCorrectAnswers, isLoading, error] = useFetchQuiz(quizConfig, shouldFetch, setHasInsufficientQuestions, setConfiguringQuiz, setQuizStarted);
 
-  console.log(error)
-
   // Function to start quiz configuration
   function startConfiguringQuiz() {
     setConfiguringQuiz(true);
