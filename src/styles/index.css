@@ -11,7 +11,7 @@ body, h1, h2, h3, h4, h5, h6, ul, ol, li, figure, p, pre, blockquote, img, input
 }
 
 body {
-  background: #F2F3F7;
+  background: linear-gradient(to bottom right, #F2F3F7, #E0E5EC);
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
 }
@@ -34,12 +34,14 @@ input[type='radio'] {
 .start-title, .question, .user-score-description {
   color: #293264;
   font-weight: 700;
+  font-family: 'Georgia', serif;
 }
 
 .start-title {
   font-size: 2.5rem;
   margin-bottom: 0.25em;
   text-align: center;
+  letter-spacing: 2px;
 }
 
 .start-description, .placeholder-description {
@@ -54,6 +56,13 @@ input[type='radio'] {
 .question {
   margin-bottom: 10px;
   width: 100%;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.user-score-description {
+  font-weight: 300;
+  font-size: 1.5rem;
 }
 
 .error-text {
@@ -63,11 +72,17 @@ input[type='radio'] {
   color: #fff;
   display: flex;
   align-items: center;
-  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   margin-bottom: 2rem;
   padding: 10px 15px;
-  transition: all 0.3s ease-in-out;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+p {
+  line-height: 1.5;
 }
 
 /* ========================================
@@ -167,8 +182,17 @@ label:hover, .check-answers-btn:hover, .play-again-btn:hover, .start-btn:hover, 
 }
 
 .answer-container label {
-  flex-grow: 0; /* This ensures labels don't stretch beyond their content */
-  margin: 0 5px; /* This gives a little spacing between each option */
+  flex-grow: 0; 
+  margin: 0 5px; 
+}
+
+/* Hover Effect for Answer Choices */
+.answer-container label:hover {
+  background-color: #e0e0e0; 
+}
+
+.answer-container input[type='radio']:checked + label {
+  border: 2px solid #4D5B9E;  
 }
 
 /* ========================================
@@ -235,6 +259,22 @@ label:hover, .check-answers-btn:hover, .play-again-btn:hover, .start-btn:hover, 
   justify-self: center;
 }
 
+.configuration-container select {
+  background-color: #f2f2f2;
+  border: 2px solid #666; 
+  border-radius: 10px;
+  color: #333;               
+  cursor: pointer;
+  padding: 10px 20px;
+  font: inherit;
+  transition: transform 0.2s;
+}
+
+.configuration-container select:hover {
+  transform: scale(1.05);
+  border-color: #4D5B9E;
+}
+
 /* ========================================
    Responsive Styles
 ======================================== */
@@ -247,34 +287,37 @@ label:hover, .check-answers-btn:hover, .play-again-btn:hover, .start-btn:hover, 
   .configuration-container button {
     grid-column: span 1;
   }
-}
 
-@media (max-width: 768px) {
   .quiz-container {
-    width: 90%;  /* Adjust width */
+    width: 90%;
+    max-height: none;
   }
-  
+
   .start-title {
-    font-size: 2rem;  /* Smaller title */
+    font-size: 2rem;
   }
 
   .start-description, .placeholder-description {
-    font-size: 1.2rem;  /* Smaller description */
+    font-size: 1.2rem;
   }
 
   .user-score-description, .question {
-    font-size: 1rem;  /* Smaller question and score description */
+    font-size: 1rem;
   }
 
   .answer-container {
-    flex-direction: column;  /* Stack answers vertically */
+    flex-direction: column;
   }
 
   label, .check-answers-btn, .play-again-btn, .start-btn, .start-quiz-btn {
-    padding: 0.8em 2em;  /* Smaller padding */
+    padding: 0.8em 2em;
   }
 
   .quiz-item-container {
-    padding: 0.8em;  /* Smaller padding */
+    padding: 0.8em;
+  }
+
+  .quiz-item-container {
+    flex-direction: column;
   }
 }
