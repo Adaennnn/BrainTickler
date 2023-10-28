@@ -11,17 +11,16 @@ function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig, typeOfQuiz }) {
   const [quizUserAnswers, setQuizUserAnswers] = React.useState(
     buildUndefinedKeysObject(numOfQuestions, userAnswerKeyBase)
   );
-
+  const [answersSubmited, setAnswersSubmited] = React.useState(false);
+  
   // Use a custom hook to manage user's correct answers
-  const correctUserAnswers = useCorrectAnswers(quizUserAnswers, quizCorrectAnswers, typeOfQuiz);
+  const correctUserAnswers = useCorrectAnswers(quizUserAnswers, quizCorrectAnswers, typeOfQuiz, answersSubmited);
 
   // useMemo to optimize calculation of whether all answers are given
   const allAnswersGiven = React.useMemo(
     () => Object.values(quizUserAnswers).every(answer => answer !== undefined), 
     [quizUserAnswers, numOfQuestions]
   );
-
-  const [answersSubmited, setAnswersSubmited] = React.useState(false);
 
   // Event handler for input change (i.e., user selecting an answer)
   function handleChange(event) {

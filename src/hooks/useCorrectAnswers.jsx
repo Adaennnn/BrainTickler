@@ -1,40 +1,32 @@
 import React from "react";
 
-export const useCorrectAnswers = (quizUserAnswers, quizCorrectAnswers, typeOfQuiz) => {
+// Custom hook to determine correct answers provided by the user in a quiz.
+export const useCorrectAnswers = (quizUserAnswers, quizCorrectAnswers, typeOfQuiz, answersSubmited) => {
     // State to hold user-provided correct answers
     const [correctUserAnswers, setCorrectUserAnswers] = React.useState([]);
-    
+
     // Update state based on quizUserAnswers and quizCorrectAnswers
     React.useEffect(() => {
-        let tempCorrectUserAnswers = []; // Temporary array to hold correct answers
+        // Temporary array to hold correct answers
+        let tempCorrectUserAnswers = [];
 
-        // Loop through user's answers
-        for (const quizItem in quizUserAnswers) {
-            const currentAnswer = quizUserAnswers[quizItem]; // Current user answer
-            
-            // Find matching correct answer
-            let correctUserAnswer
-            if (typeOfQuiz === "multiple") {
-                correctUserAnswer = quizCorrectAnswers.find(answer => answer === currentAnswer);
-            } else if (typeOfQuiz === "boolean") {
-                quizCorrectAnswers.forEach(correctAnswer => {
-                    if (currentAnswer === correctAnswer) {
-                        correctUserAnswer = currentAnswer
-                    } else {
-                        correctUserAnswer = ""
-                    }
-                });
-            }
+        // Convert user answers object to an array for easier comparison
+        const quizUserAnswersArray = Object.values(quizUserAnswers);
 
-            // If found, add to temporary array
-            if (correctUserAnswer) {
-                tempCorrectUserAnswers.push(correctUserAnswer);
+        // Loop through each correct answer to see if the user got it right
+        for (let i = 0; i < quizCorrectAnswers.length; i++) {
+            const currentCorrectAnswer = quizCorrectAnswers[i];
+            const currentUserAnswer = quizUserAnswersArray[i];
+
+            if (currentCorrectAnswer === currentUserAnswer) {
+                tempCorrectUserAnswers.push(currentUserAnswer);
             }
         }
 
-        // Update state with array of correct answers
+        // Update the state with correct answers
         setCorrectUserAnswers(tempCorrectUserAnswers);
-    }, [quizUserAnswers, quizCorrectAnswers]);
+    }, [answersSubmited]);
 
-    return correctUserAnswers; // Return array of correct answers
+    // Return array of correct answers
+    return correctUserAnswers;
 };
