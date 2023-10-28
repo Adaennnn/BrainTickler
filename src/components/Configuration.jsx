@@ -1,6 +1,8 @@
 import React from "react";
+import Select from "./Select";
 
-function Configuration({
+// Main Configuration component
+const Configuration = ({
   quizConfig, 
   setQuizConfig, 
   setQuizStarted, 
@@ -8,13 +10,52 @@ function Configuration({
   setShouldFetch,
   error,
   setHasInsufficientQuestions
-}) {
+}) => {
   
-  // Local state for form data
+  // Initialize local state with quiz configuration from props
   const [localQuizConfig, setLocalQuizConfig] = React.useState(quizConfig);
 
-  // Function to handle form changes
-  function handleChange(event) {
+  // Declaring variables holding all options
+  const categoryOptions = [
+    { value: '9', label: 'General Knowledge' },
+    { value: '10', label: 'Entertainment: Books' },
+    { value: '11', label: 'Entertainment: Film' },
+    { value: '12', label: 'Entertainment: Music' },
+    { value: '13', label: 'Entertainment: Musicals & Theatres' },
+    { value: '14', label: 'Entertainment: Television' },
+    { value: '15', label: 'Entertainment: Video Games' },
+    { value: '16', label: 'Entertainment: Board Games' },
+    { value: '17', label: 'Science & Nature' },
+    { value: '18', label: 'Science: Computers' },
+    { value: '19', label: 'Science: Mathematics' },
+    { value: '20', label: 'Mythology' },
+    { value: '21', label: 'Sports' },
+    { value: '22', label: 'Geography' },
+    { value: '23', label: 'History' },
+    { value: '24', label: 'Politics' },
+    { value: '25', label: 'Art' },
+    { value: '26', label: 'Celebrities' },
+    { value: '27', label: 'Animals' },
+    { value: '28', label: 'Vehicles' },
+    { value: '29', label: 'Entertainment: Comics' },
+    { value: '30', label: 'Science: Gadgets' },
+    { value: '31', label: 'Entertainment: Japanese Anime & Manga' },
+    { value: '32', label: 'Entertainment: Cartoon & Animations' }
+  ];
+  
+  const difficultyOptions = [
+    { value: 'easy', label: 'Easy' },
+    { value: 'medium', label: 'Medium' },
+    { value: 'hard', label: 'Hard' },
+  ]
+
+  const typeOptions = [
+    { value: 'multiple', label: 'Multiple Choice' },
+    { value: 'boolean', label: 'True / False' },
+  ]
+
+  // Handle changes in form fields
+  const handleChange = (event) => {
     const { value, name } = event.target;
     setLocalQuizConfig(prevFormData => ({
       ...prevFormData,
@@ -22,8 +63,8 @@ function Configuration({
     }));
   }
 
-  // Function to handle form submission
-  function handleSubmit(event) {
+  // Handle form submission
+  const handleSubmit = (event) => {
     event.preventDefault();
     setQuizConfig(localQuizConfig);
     setShouldFetch(true);
@@ -32,68 +73,36 @@ function Configuration({
     setQuizStarted(true);
   }
   
-
   return (
     <div className="configuration-container">
       <h1>Configuration</h1>
+      {/* Display error message if any */}
       {error && <p className="error-text">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="category">Category:</label>
-        <select 
-          name="category"
+        <Select
+          label="Category"
           id="category"
+          name="category"
           value={localQuizConfig.category}
           onChange={handleChange}
-        >
-          <option value="9">General Knowledge</option>
-          <option value="10">Entertainment: Books</option>
-          <option value="11">Entertainment: Film</option>
-          <option value="12">Entertainment: Music</option>
-          <option value="13">Entertainment: Musicals & Theatres</option>
-          <option value="14">Entertainment: Television</option>
-          <option value="15">Entertainment: Video Games</option>
-          <option value="16">Entertainment: Board Games</option>
-          <option value="17">Science & Nature</option>
-          <option value="18">Science: Computers</option>
-          <option value="19">Science: Mathematics</option>
-          <option value="20">Mythology</option>
-          <option value="21">Sports</option>
-          <option value="22">Geography</option>
-          <option value="23">History</option>
-          <option value="24">Politics</option>
-          <option value="25">Art</option>
-          <option value="26">Celebrities</option>
-          <option value="27">Animals</option>
-          <option value="28">Vehicles</option>
-          <option value="29">Entertainment: Comics</option>
-          <option value="30">Science: Gadgets</option>
-          <option value="31">Entertainment: Japanese Anime & Manga</option>
-          <option value="32">Entertainment: Cartoon & Animations</option>
-        </select>
-        
-        <label htmlFor="difficulty">Difficulty:</label>
-        <select 
-          name="difficulty"
+          options={categoryOptions}
+        />
+        <Select
+          label="Difficulty"
           id="difficulty"
+          name="difficulty"
           value={localQuizConfig.difficulty}
           onChange={handleChange}
-        >
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-        
-        <label htmlFor="type">Type:</label>
-        <select 
-          name="type"
+          options={difficultyOptions}
+        />
+        <Select
+          label="Type"
           id="type"
+          name="type"
           value={localQuizConfig.type}
           onChange={handleChange}
-        >
-          <option value="multiple">Multiple Choice</option>
-          <option value="boolean">True / False</option>
-        </select>
-        
+          options={typeOptions}
+        />
         <button className="start-quiz-btn">Start Quiz</button>
       </form>
     </div>
