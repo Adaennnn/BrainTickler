@@ -4,40 +4,48 @@ import { useCorrectAnswers } from "../hooks/useCorrectAnswers";
 import { buildUndefinedKeysObject } from "../utilities/utility";
 
 function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig }) {
-
-  // Initialize state variables and other base variables
-  const userAnswerKeyBase = "userAnswerOfQuestion";
+  
+  // Prefix for form field names related to user answers
+  const userAnswerKeyPrefix = "userAnswerOfQuestion";
+  
+  // Destructure the number of questions from quiz configuration
   const { numOfQuestions } = quizConfig;
+  
+  // Initialize state for storing user's answers to quiz questions
   const [quizUserAnswers, setQuizUserAnswers] = React.useState(
-    buildUndefinedKeysObject(numOfQuestions, userAnswerKeyBase)
+    buildUndefinedKeysObject(numOfQuestions, userAnswerKeyPrefix)
   );
+  
+  // Initialize state for tracking if the answers have been submitted
   const [answersSubmited, setAnswersSubmited] = React.useState(false);
   
-  // Use a custom hook to manage user's correct answers
+  // Custom hook to determine the number of correct answers
   const correctUserAnswers = useCorrectAnswers(quizUserAnswers, quizCorrectAnswers, answersSubmited);
 
-  // useMemo to optimize calculation of whether all answers are given
+  // Memoize calculation to check if all questions have been answered
   const allAnswersGiven = React.useMemo(
     () => Object.values(quizUserAnswers).every(answer => answer !== undefined), 
-    [quizUserAnswers, numOfQuestions]
+    [quizUserAnswers]
   );
 
-  // Event handler for input change (i.e., user selecting an answer)
-  function handleChange(event) {
+  // Handle changes to quiz answer selections
+  const handleChange = (event) => {
     const { value, name } = event.target;
+    // Functional update to ensure we're using the latest state
     setQuizUserAnswers(prevFormData => ({
       ...prevFormData,
       [name]: value
     }));
-  }
+  };
 
-  // Event handler for form submission
-  function handleSubmit(event) {
+  // Handle quiz form submission
+  const handleSubmit = (event) => {
     event.preventDefault();
+    // Only submit if all questions have been answered
     if (allAnswersGiven) {
-      setAnswersSubmited(true);  // If all answers given, set flag to true
+      setAnswersSubmited(true);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="quiz-container">
@@ -45,12 +53,12 @@ function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig }) {
         quizQuestions={quizQuestions}
         quizCorrectAnswers={quizCorrectAnswers}
         quizUserAnswers={quizUserAnswers}
-        userAnswerKeyBase={userAnswerKeyBase}
+        userAnswerKeyPrefix={userAnswerKeyPrefix}
         answersSubmited={answersSubmited}
         handleChange={handleChange}
       />
       
-      {/* Conditional rendering based on whether answers have been submitted */}
+      {/* Display game-end screen if answers have been submitted, otherwise show the submit button */}
       {answersSubmited ? (
         <div className="end-game-container">
           <p className="user-score-description">

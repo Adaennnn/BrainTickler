@@ -4,14 +4,14 @@ function Question({
   quizQuestions,
   quizCorrectAnswers,
   quizUserAnswers,
-  userAnswerKeyBase,
+  userAnswerKeyPrefix,
   answersSubmited,
   handleChange,
 }) {
   // Generate quiz UI by mapping over the list of quiz questions.
   const quizElements = quizQuestions.map((quizItem, index) => {
     // Construct the unique key for user's answer to each question.
-    const currentQuestionAnswerKey = `${userAnswerKeyBase}${index + 1}`;
+    const currentQuestionAnswerKey = `${userAnswerKeyPrefix}${index + 1}`;
     const { answers, question } = quizItem;
     // Return a fieldset for each question.
     return (
