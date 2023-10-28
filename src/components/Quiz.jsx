@@ -3,7 +3,7 @@ import Question from "./Question";
 import { useCorrectAnswers } from "../hooks/useCorrectAnswers";
 import { buildUndefinedKeysObject } from "../utilities/utility";
 
-function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig, typeOfQuiz }) {
+function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig }) {
 
   // Initialize state variables and other base variables
   const userAnswerKeyBase = "userAnswerOfQuestion";
@@ -14,7 +14,7 @@ function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig, typeOfQuiz }) {
   const [answersSubmited, setAnswersSubmited] = React.useState(false);
   
   // Use a custom hook to manage user's correct answers
-  const correctUserAnswers = useCorrectAnswers(quizUserAnswers, quizCorrectAnswers, typeOfQuiz, answersSubmited);
+  const correctUserAnswers = useCorrectAnswers(quizUserAnswers, quizCorrectAnswers, answersSubmited);
 
   // useMemo to optimize calculation of whether all answers are given
   const allAnswersGiven = React.useMemo(

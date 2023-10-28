@@ -20,7 +20,7 @@ function App() {
   const [hasInsufficientQuestions, setHasInsufficientQuestions] = React.useState(false);
 
   // Custom hook to fetch quiz questions based on quiz configuration
-  const [quizQuestions, quizCorrectAnswers, isLoading, error, typeOfQuiz] = useFetchQuiz(quizConfig, shouldFetch, setHasInsufficientQuestions, setConfiguringQuiz, setQuizStarted);
+  const [quizQuestions, quizCorrectAnswers, isLoading, error] = useFetchQuiz(quizConfig, shouldFetch, setHasInsufficientQuestions, setConfiguringQuiz, setQuizStarted);
   
   // Function to start quiz configuration
   function startConfiguringQuiz() {
@@ -53,7 +53,6 @@ function App() {
             quizQuestions={quizQuestions}
             quizCorrectAnswers={quizCorrectAnswers}
             quizConfig={quizConfig}
-            typeOfQuiz={typeOfQuiz}
           />
         )
       }

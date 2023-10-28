@@ -1,7 +1,7 @@
 import React from "react";
 
 // Custom hook to determine correct answers provided by the user in a quiz.
-export const useCorrectAnswers = (quizUserAnswers, quizCorrectAnswers, typeOfQuiz, answersSubmited) => {
+export const useCorrectAnswers = (quizUserAnswers, quizCorrectAnswers, answersSubmited) => {
     // State to hold user-provided correct answers
     const [correctUserAnswers, setCorrectUserAnswers] = React.useState([]);
 
