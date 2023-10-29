@@ -67,6 +67,7 @@ const App = () => {
         quizQuestions={quizQuestions}
         quizCorrectAnswers={quizCorrectAnswers}
         quizConfig={quizConfig}
+        setQuizStarted={setQuizStarted}
       />
     );
   };

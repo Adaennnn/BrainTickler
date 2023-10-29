@@ -3,7 +3,7 @@ import Question from "./Question";
 import { useCorrectAnswers } from "../hooks/useCorrectAnswers";
 import { buildUndefinedKeysObject } from "../utilities/utility";
 
-function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig }) {
+function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig, setQuizStarted }) {
   
   // Prefix for form field names related to user answers
   const userAnswerKeyPrefix = "userAnswerOfQuestion";
@@ -47,6 +47,10 @@ function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig }) {
     }
   };
 
+  const restartGame = () => {
+    setQuizStarted(false)
+  }
+
   return (
     <form onSubmit={handleSubmit} className="quiz-container">
       <Question 
@@ -64,7 +68,7 @@ function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig }) {
           <p className="user-score-description">
             You scored {correctUserAnswers.length}/{numOfQuestions} correct answers
           </p>
-          <button className="play-again-btn">Play again</button>
+          <button className="play-again-btn" onClick={restartGame}>Play again</button>
         </div>
       ) : (
         <button 
