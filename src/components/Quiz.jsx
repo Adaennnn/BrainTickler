@@ -3,7 +3,12 @@ import Question from "./Question";
 import { useCorrectAnswers } from "../hooks/useCorrectAnswers";
 import { buildUndefinedKeysObject } from "../utilities/utility";
 
-function Quiz({ quizQuestions, quizCorrectAnswers, quizConfig, setQuizStarted }) {
+const Quiz = ({ 
+  quizQuestions, 
+  quizCorrectAnswers, 
+  quizConfig, 
+  setQuizStarted 
+}) => {
   
   // Prefix for form field names related to user answers
   const userAnswerKeyPrefix = "userAnswerOfQuestion";

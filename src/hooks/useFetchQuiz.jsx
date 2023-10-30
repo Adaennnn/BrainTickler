@@ -1,7 +1,13 @@
 import React from "react";
 import { sanitize, shuffle } from "../utilities/utility";
 
-const useFetchQuiz = (quizConfig, shouldFetch, setHasInsufficientQuestions, setConfiguringQuiz, setQuizStarted) => {
+export const useFetchQuiz = (
+  quizConfig, 
+  shouldFetch, 
+  setHasInsufficientQuestions, 
+  setConfiguringQuiz, 
+  setQuizStarted
+  ) => {
 
   const [quizQuestions, setQuizQuestions] = React.useState([]);
   const [quizCorrectAnswers, setQuizCorrectAnswers] = React.useState([]);
@@ -68,5 +74,3 @@ const useFetchQuiz = (quizConfig, shouldFetch, setHasInsufficientQuestions, setC
 
   return [quizQuestions, quizCorrectAnswers, isLoading, error];
 };
-
-export default useFetchQuiz;

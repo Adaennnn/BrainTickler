@@ -5,7 +5,7 @@ import DOMPurify from "dompurify";
  * @param {Array} array - The array to shuffle.
  * @return {Array} A new array that is a shuffled version of the input array.
  */
-function shuffle(array) {
+const shuffle = (array) => {
     const newArr = [...array];
     for (let i = newArr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -20,7 +20,7 @@ function shuffle(array) {
  * @param {String} key - The base key to be used.
  * @return {Object} A new object with undefined keys.
  */
-function buildUndefinedKeysObject(length, key) {
+const buildUndefinedKeysObject = (length, key) => {
     const obj = {}
     for (let i = 1; i <= length; i++) {
         obj[`${key}${i}`] = undefined;
@@ -34,7 +34,7 @@ function buildUndefinedKeysObject(length, key) {
  * @param {Array} arr - The array containing objects to sanitize.
  * @return {Array} A new array with sanitized objects.
  */
-function sanitize(arr) {
+const sanitize = (arr) => {
     return arr.map(obj => {
         const newObj = {};
         for (let key in obj) {

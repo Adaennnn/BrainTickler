@@ -1,7 +1,14 @@
 import React from "react";
 
 // Reusable Select component as an arrow function
-const Select = ({ label, id, name, value, onChange, options }) => {
+const Select = ({ 
+  label, 
+  id, 
+  name, 
+  value, 
+  onChange, 
+  options 
+}) => {
   return (
     <>
       <label htmlFor={id}>{label}:</label>

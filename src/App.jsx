@@ -2,7 +2,7 @@ import React from "react";
 import Start from "./components/Start";
 import Quiz from "./components/Quiz";
 import Configuration from "./components/Configuration";
-import useFetchQuiz from "./hooks/useFetchQuiz";
+import { useFetchQuiz } from "./hooks/useFetchQuiz";
 
 const App = () => {
   // State for quiz configuration

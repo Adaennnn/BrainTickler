@@ -1,6 +1,6 @@
 import React from "react";
 
-function Start({ startConfiguringQuiz }) {
+const Start = ({ startConfiguringQuiz }) => {
   return (
     <div className="start-container">
       <h1 className="start-title">BrainTickler</h1>
